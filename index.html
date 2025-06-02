@@ -142,6 +142,63 @@
   <footer>
     &copy; 2025 AI Trend & Ads Agent. All rights reserved.
   </footer>
+<div id="fb-root"></div>
+
+<!-- Facebook Login UI -->
+<div style="text-align: center; margin-top: 2rem;">
+  <div id="status">Checking login status...</div>
+  <button onclick="checkLoginState();" class="button">Login with Facebook</button>
+</div>
+
+<script>
+  // Called with the results from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    const statusDiv = document.getElementById('status');
+
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      FB.api('/me', function(response) {
+        statusDiv.innerHTML = 'Hello, ' + response.name + '! You are logged in.';
+      });
+    } else if (response.status === 'not_authorized') {
+      // Logged into Facebook but not your app
+      statusDiv.innerHTML = 'Please log into this app.';
+    } else {
+      // Not logged into Facebook at all
+      statusDiv.innerHTML = 'Please log into Facebook.';
+    }
+  }
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  // Facebook SDK
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '706174205324772', // استبدله بـ App ID الحقيقي
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v19.0'
+    });
+
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 
 </body>
 </html>
