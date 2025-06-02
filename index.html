@@ -1,89 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Trend & Ads AI Agent</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facebook Login Integration</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(90deg, #4b6cb7, #182848);
-      color: white;
-      padding: 2rem 1rem;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 50px;
+      background: #f0f2f5;
     }
-
-    nav {
-      background-color: #333;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #4b6cb7;
-    }
-
-    section {
+    .container {
+      background: white;
       padding: 2rem;
-      max-width: 900px;
+      border-radius: 10px;
+      max-width: 600px;
       margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #222;
-      color: white;
-    }
-
-    h1, h2 {
-      margin-top: 0;
-    }
-
-    .button {
-      background-color: #4b6cb7;
-      color: white;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      cursor: pointer;
+    #status {
       margin-top: 1rem;
-    }
-
-    .button:hover {
-      background-color: #182848;
+      font-size: 1.2rem;
+      color: #333;
     }
   </style>
 </head>
 <body>
+  <div id="fb-root"></div>
+
+  <div class="container">
+    <h1>Welcome to My AI App</h1>
+    <p>Login using Facebook to continue</p>
+
+    <!-- زر تسجيل الدخول من فيسبوك -->
+    <fb:login-button 
+      config_id="{your-config-id}" 
+      scope="public_profile,email"
+      onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <!-- حالة تسجيل الدخول -->
+    <div id="status">Checking login status...</div>
+  </div>
 
   <!-- Facebook SDK -->
-  <div id="fb-root"></div>
   <script>
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '706174205324772', // ضع App ID هنا
+        appId      : '706174205324772', // ضع App ID الخاص بك هنا
         cookie     : true,
         xfbml      : true,
         version    : 'v19.0'
       });
-      FB.AppEvents.logPageView();
+
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
     };
+
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    }
+
+    function statusChangeCallback(response) {
+      console.log(response);
+      const statusDiv = document.getElementById('status');
+
+      if (response.status === 'connected') {
+        FB.api('/me', function(response) {
+          statusDiv.innerHTML = '👋 Hello, ' + response.name + '! You are logged in.';
+        });
+      } else if (response.status === 'not_authorized') {
+        statusDiv.innerHTML = 'Please log into this app.';
+      } else {
+        statusDiv.innerHTML = 'Please log into Facebook.';
+      }
+    }
 
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -93,112 +88,5 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
-
-  <!-- Header -->
-  <header>
-    <h1>AI Trend & Ads Agent</h1>
-    <p>Smart Insights for Smarter E-commerce Decisions</p>
-    <button class="button">Get Started</button>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <!-- Home Section -->
-  <section id="home">
-    <h2>Welcome!</h2>
-    <p>
-      This platform leverages AI to help e-commerce businesses predict trending products before they go viral. Get data-driven reports, ad recommendations, and insights to boost your marketing campaigns.
-    </p>
-    <p>
-      Our goal is to empower digital entrepreneurs with cutting-edge tools for smarter decisions and higher profits.
-    </p>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      We analyze data from platforms like Google Trends, TikTok, YouTube, Amazon, and Meta Ads to predict market demand and suggest actionable insights for advertising and product positioning.
-    </p>
-    <p>
-      This tool is designed by <strong>Hassan</strong>, a passionate AI developer and trend researcher.
-    </p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:hc866898@gmail.com">hc866898@gmail.com</a></p>
-    <p>Phone: <a href="tel:+212770590135">+212770590135</a></p>
-    <p>Location: Morocco</p>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 AI Trend & Ads Agent. All rights reserved.
-  </footer>
-<div id="fb-root"></div>
-
-<!-- Facebook Login UI -->
-<div style="text-align: center; margin-top: 2rem;">
-  <div id="status">Checking login status...</div>
-  <button onclick="checkLoginState();" class="button">Login with Facebook</button>
-</div>
-
-<script>
-  // Called with the results from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    const statusDiv = document.getElementById('status');
-
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      FB.api('/me', function(response) {
-        statusDiv.innerHTML = 'Hello, ' + response.name + '! You are logged in.';
-      });
-    } else if (response.status === 'not_authorized') {
-      // Logged into Facebook but not your app
-      statusDiv.innerHTML = 'Please log into this app.';
-    } else {
-      // Not logged into Facebook at all
-      statusDiv.innerHTML = 'Please log into Facebook.';
-    }
-  }
-
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  // Facebook SDK
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '706174205324772', // استبدله بـ App ID الحقيقي
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v19.0'
-    });
-
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  };
-
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
 </body>
 </html>
