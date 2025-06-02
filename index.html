@@ -3,96 +3,54 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Trend & Ads Intelligence Agent</title>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      color: #333;
-    }
-
-    header {
-      background-color: #1e1e2f;
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-
-    nav a {
-      color: #ccc;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
-
-    .hero {
-      padding: 3rem;
-      text-align: center;
-      background: white;
-      margin: 2rem auto;
-      border-radius: 20px;
-      max-width: 800px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      color: #1e1e2f;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      line-height: 1.7;
-    }
-
-    .hero .btn {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 1.5rem;
-      background-color: #1e1e2f;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    .hero .btn:hover {
-      background-color: #333;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      color: #555;
-    }
-  </style>
+  <title>AI Trend Agent</title>
 </head>
 <body>
-  <header>
-    <h1>AI Trend & Ads Intelligence Agent</h1>
-    <nav>
-      <a href="index.html">Home</a> |
-      <a href="about.html">About</a> |
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <h1>Welcome to My AI Trend Site</h1>
 
-  <div class="hero">
-    <h1>Discover What's Trending — Before Everyone Else</h1>
-    <p>
-      Our AI-powered engine scans Google Trends, TikTok, YouTube, and Amazon to predict which products are going viral.
-      Make smart marketing decisions and launch high-converting ads before your competitors even notice the trend.
-    </p>
-    <a href="about.html" class="btn">Learn More</a>
-  </div>
+  <!-- المحتوى الرئيسي هنا -->
 
-  <footer>© 2025 ElHassan Chbihi Quadouri | All rights reserved</footer>
+  <!-- Facebook SDK -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '123456789012345', // ✅ استخدم App ID الحقيقي
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v19.0'
+      });
+      FB.AppEvents.logPageView(); 
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 </body>
 </html>
